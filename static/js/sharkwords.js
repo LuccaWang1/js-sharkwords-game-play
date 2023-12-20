@@ -50,7 +50,11 @@ const isLetterInWord = (letter) => document.querySelector(`div.${letter}`) !== n
 // Called when `letter` is in word. Update contents of divs with `letter`.
 //
 const handleCorrectGuess = (letter) => {
-  // Replace this with your code
+  const matchingDivsToLetter = document.querySelectorAll(`div.${letter}`); 
+  
+  for (const div of matchingDivsToLetter) {
+    div.innerHTML=letter
+  }
 };
 
 //
@@ -62,7 +66,25 @@ const handleCorrectGuess = (letter) => {
 
 const handleWrongGuess = () => {
   numWrong += 1;
-  // Replace this with your code
+  //if numWrong < 5 then do this
+  if (numWrong < 5) {
+    
+  } else if () {
+
+  }
+  //else if numWrong === 5 then disable all buttons, show the hidden element, link tag 
+  
+  const matchingDivsToLetter = document.querySelectorAll(`div.${letter}`); 
+  for (const div of matchingDivsToLetter) {
+    div.innerHTML=letter
+  }
+
+  if (isLetterInWord(letter_var)){
+    handleCorrectGuess(letter_var);
+  } else {
+    handleWrongGuess(letter_var);
+  }
+
 };
 
 //  Reset game state. Called before restarting the game.
@@ -81,7 +103,24 @@ const resetGame = () => {
 
   for (const button of document.querySelectorAll('button')) {
     // add an event handler to handle clicking on a letter button
-    // YOUR CODE HERE
+    button.addEventListener("click", (evt) => {
+    //disableLetterButton
+    // when they click the button, then turn off the button 
+    disableLetterButton(evt.target); 
+    // we get the text/letter from that button 
+    const letter_var = evt.target.innerHTML;
+    if (isLetterInWord(letter_var)){
+      handleCorrectGuess(letter_var);
+    } else {
+      handleWrongGuess(letter_var);
+    }
+    //if that text/letter is in word: handle for correct guess 
+    //else (if letter is not in word): handle for wrong guess 
+    })
+     
+    button.addEventListener(click, handleWrongGuess)
+
+    //check if guessed letter aka correct button is chosen is in the word with if/else
   }
 
   // add an event handler to handle clicking on the Play Again button
